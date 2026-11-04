@@ -1,0 +1,9 @@
+#include<stdio.h>
+int main()
+{
+	int a=10;
+	float b=20.5;
+	char c='x';
+	printf("Hello, Alen....\n");
+	return 0;
+}
