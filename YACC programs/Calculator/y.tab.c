@@ -69,13 +69,12 @@
 /* First part of user prologue.  */
 #line 1 "main.y"
 
-  #include <stdio.h>
-  #include <stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
+int yylex(void);
+int yyerror(const char *s);
 
-  int yylex(void);
-  int yyerror(const char *s);
-
-#line 79 "y.tab.c"
+#line 78 "y.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -550,7 +549,7 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    17,    17,    22,    23,    24,    25,    32,    33,    34
+       0,    14,    14,    17,    18,    19,    20,    27,    28,    29
 };
 #endif
 
@@ -1114,63 +1113,61 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* start: expr  */
-#line 17 "main.y"
-          {
-      printf("Result = %d\n", yyvsp[0]);
-     }
-#line 1122 "y.tab.c"
+#line 14 "main.y"
+             { printf("Result = %d\n", yyvsp[0]); }
+#line 1119 "y.tab.c"
     break;
 
   case 3: /* expr: expr '+' expr  */
-#line 22 "main.y"
-                  { yyval = yyvsp[-2] + yyvsp[0]; }
-#line 1128 "y.tab.c"
+#line 17 "main.y"
+                       { yyval = yyvsp[-2] + yyvsp[0]; }
+#line 1125 "y.tab.c"
     break;
 
   case 4: /* expr: expr '-' expr  */
-#line 23 "main.y"
-                    { yyval = yyvsp[-2] - yyvsp[0]; }
-#line 1134 "y.tab.c"
+#line 18 "main.y"
+                       { yyval = yyvsp[-2] - yyvsp[0]; }
+#line 1131 "y.tab.c"
     break;
 
   case 5: /* expr: expr '*' expr  */
-#line 24 "main.y"
-                    { yyval = yyvsp[-2] * yyvsp[0]; }
-#line 1140 "y.tab.c"
+#line 19 "main.y"
+                       { yyval = yyvsp[-2] * yyvsp[0]; }
+#line 1137 "y.tab.c"
     break;
 
   case 6: /* expr: expr '/' expr  */
-#line 25 "main.y"
-                    {
-      if (yyvsp[0] == 0) {
-        printf("Error: Division by Zero\n");
-        exit(1);
-      }
-      yyval = yyvsp[-2] / yyvsp[0];
-    }
-#line 1152 "y.tab.c"
+#line 20 "main.y"
+                       {
+            if (yyvsp[0] == 0) {
+                yyerror("Division by zero");
+                YYABORT;
+            }
+            yyval = yyvsp[-2] / yyvsp[0];
+        }
+#line 1149 "y.tab.c"
     break;
 
   case 7: /* expr: '-' expr  */
-#line 32 "main.y"
-                            { yyval = -yyvsp[0]; }
-#line 1158 "y.tab.c"
+#line 27 "main.y"
+                              { yyval = -yyvsp[0]; }
+#line 1155 "y.tab.c"
     break;
 
   case 8: /* expr: '(' expr ')'  */
-#line 33 "main.y"
-                   { yyval = yyvsp[-1]; }
-#line 1164 "y.tab.c"
+#line 28 "main.y"
+                              { yyval = yyvsp[-1]; }
+#line 1161 "y.tab.c"
     break;
 
   case 9: /* expr: NUM  */
-#line 34 "main.y"
-          { yyval = yyvsp[0]; }
-#line 1170 "y.tab.c"
+#line 29 "main.y"
+                              { yyval = yyvsp[0]; }
+#line 1167 "y.tab.c"
     break;
 
 
-#line 1174 "y.tab.c"
+#line 1171 "y.tab.c"
 
       default: break;
     }
@@ -1363,16 +1360,16 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 36 "main.y"
+#line 31 "main.y"
 
 
 int main() {
-  printf("Enter expression: ");
-  yyparse();
-  return 0;
+    printf("Enter expression: ");
+    yyparse();
+    return 0;
 }
 
 int yyerror(const char *s) {
-  printf("Error: %s\n", s);
-  return 0;
+    printf("Error: %s\n", s);
+    return 0;
 }
